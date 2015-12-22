@@ -18,7 +18,7 @@
             $cdquery="SELECT dimmer,actual FROM dimmer_names";
             $cdresult=mysql_query($cdquery) or die ("Query to get data from dimmer failed: ".mysql_error());
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
-            $dimmer= htmlspecialchars(pg_escape_string($dim));;
+            $dimmer= htmlspecialchars($dim);;
             while ($cdrow=mysql_fetch_array($cdresult)) {
             $cdVal=$cdrow["dimmer"];
             $cdAct=$cdrow["actual"];
@@ -35,7 +35,7 @@
             }
             echo "</select><input type=\"submit\" value=\"Submit\"></form>";
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
-            $dimmer= htmlspecialchars(pg_escape_string($dim));;
+            $dimmer= htmlspecialchars($dim);;
             $sql = "SELECT lamp,b.actual,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer='".$dimmer."'";
             //echo $sql;
             $result = mysql_query($sql) or die ("Query to get data from dimmer failed: ".mysql_error());
