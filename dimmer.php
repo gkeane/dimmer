@@ -36,14 +36,14 @@
             echo "</select><input type=\"submit\" value=\"Submit\"></form>\n";
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
             $dimmer= htmlspecialchars($dim);;
-            $sql = "SELECT lamp,b.actual,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer='".$dimmer."'";
+            $sql = "SELECT lamp,b.actual,r2,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer='".$dimmer."'";
             //echo $sql;
             $result = mysql_query($sql) or die ("Query to get data from dimmer failed: ".mysql_error());
             echo "<div class=\"rTable\">\n";
-            echo "<div class=\"rTableRow\"><div class=\"rTableHead\">Lamp</div><div class=\"rTableHead\">Lamp Actual</div><div class=\"rTableHead\">refire_scale</div><div class=\"rTableHead\">calc_50</div><div class=\"rTableHead\">calc_20</div><div class=\"rTableHead\">lumen_watt</div><div class=\"rTableHead\">total</div></div>\n";
+            echo "<div class=\"rTableHeading\"><div class=\"rTableHead\">Lamp ID</div><div class=\"rTableHead\">Lamp Name</div><div class=\"rTableHead\">Linearity Score</div><div class=\"rTableHead\">Refire Score</div><div class=\"rTableHead\">Medium dimmer performance scale</div><div class=\"rTableHead\">Low dimmer performance scale</div><div class=\"rTableHead\">Light output efficiency</div><div class=\"rTableHead\">Total Score</div></div>\n";
                 // output data of each row
                 while($row = mysql_fetch_array($result)) {
-                    echo "<div class=\"rTableRow\"><div class=\"rTableCell\">" . $row["lamp"]. "</div><div class=\"rTableCell\">" . $row["actual"]. "</div><div class=\"rTableCell\">" . $row["refire_scale"]. "</div><div class=\"rTableCell\">". $row["calc_50"]. "</div><div class=\"rTableCell\">" . $row["calc_20"]. "</div><div class=\"rTableCell\">". $row["lumen_watt"]. "</div><div class=\"rTableCell\">". $row["total"]. "</div></div>\n";
+                    echo "<div class=\"rTableRow\"><div class=\"rTableCell\">" . $row["lamp"]. "</div><div class=\"rTableCell\">" . $row["actual"]. "</div><div class=\"rTableCell\">" . $row["r2"]."</div><div class=\"rTableCell\">" . $row["refire_scale"]. "</div><div class=\"rTableCell\">". round($row["calc_50"],2). "</div><div class=\"rTableCell\">" . round($row["calc_20"],2). "</div><div class=\"rTableCell\">". $row["lumen_watt"]. "</div><div class=\"rTableCell\">". round($row["total"],2). "</div></div>\n";
                 }
             echo "</table>";
             $conn->close();
