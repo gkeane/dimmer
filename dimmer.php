@@ -1,20 +1,22 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="src/jquery.easydropdown.js" type="text/javascript"></script>
 <link rel="stylesheet" href="dimmer.css" type="text/css">
 <body>
 
     <form method="get" action="dimmer.php">
-        
-        <select class="dimmer" name="dimmer">
-        
+
+        <select class="dropdown" name="dimmer">
+
             <?php
-            
+
             $mysqlserver="localhost";
             $mysqlusername="dimmer";
             $mysqlpassword="8Jx43c8JMnvY7e9Z";
             $link=mysql_connect(localhost, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysql_error());
-            
+
             $dbname = 'dimmer';
             mysql_select_db($dbname, $link) or die ("Error selecting specified database on mysql server: ".mysql_error());
-            
+
             $cdquery="SELECT dimmer,actual FROM dimmer_names";
             $cdresult=mysql_query($cdquery) or die ("Query to get data from dimmer failed: ".mysql_error());
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
@@ -31,7 +33,7 @@
                 echo "<option value=\"$cdVal\"  $sel>
                     $cdAct - $cdVal
                 </option>";
-            
+
             }
             echo "</select><input type=\"submit\" value=\"Submit\"></form>\n";
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
@@ -48,9 +50,9 @@
             echo "</table>";
             $conn->close();
             ?>
-    
+
         </select>
-        
+
     </form>
-    
-</body>     
+
+</body>
