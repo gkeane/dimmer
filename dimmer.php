@@ -37,7 +37,7 @@
                 </option>";
 
             }
-            echo "</select><input type=\"submit\" value=\"Submit\"></form>\n";
+            echo "</form>\n";
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
             $dimmer= htmlspecialchars($dim);;
             $sql = "SELECT lamp,b.actual,r2,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer='".$dimmer."'";
