@@ -1,6 +1,7 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<head><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="src/jquery.easydropdown.js" type="text/javascript"></script>
 <link rel="stylesheet" href="dimmer.css" type="text/css">
+</head>
 <body>
 
     <form method="get" action="dimmer.php">
@@ -31,7 +32,7 @@
                 $sel="selected";
             }
                 echo "<option value=\"$cdVal\"  $sel>
-                    $cdAct - $cdVal
+                    \"$cdAct - $cdVal\"
                 </option>";
 
             }
