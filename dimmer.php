@@ -32,7 +32,7 @@
                 $sel="selected";
             }
                 echo "<option value=\"$cdVal\"  $sel>
-                    \"$cdAct - $cdVal\"
+                    $cdAct - $cdVal
                 </option>";
 
             }
