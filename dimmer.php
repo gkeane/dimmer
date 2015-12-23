@@ -7,7 +7,7 @@
 
     <form method="get" action="dimmer.php">
 
-        <select class="dropdown" name="dimmer" data-settings='{"wrapperClass":"metro"}'>
+        <select class="dropdown" name="dimmer" >
 
             <?php
 
