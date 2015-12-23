@@ -7,7 +7,7 @@
 
     <form method="get" action="dimmer.php">
 
-        <select class="dropdown" name="dimmer" >
+        <select class="dropdown" name="dimmer" onchange=this.form.submit()>
 
             <?php
 
