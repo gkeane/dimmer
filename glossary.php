@@ -89,7 +89,7 @@
     <p>The ideal score would be  100, however no bulb-dimmer combination scored this high. Bulbs performed  differently with different dimmers &amp; with different profiles (curves) of  the
       same dimmer. Dimmers can alter bulb light output &amp; efficiencies. </p>
     <p>&nbsp;</p>  <div class="disclaimer"><strong>Disclaimer</strong>-
-Information provided on this website relating to goods and services offered by third parties is provided solely for information purposes and is not intended as an endorsement or expression of support by the University of Delaware or its agents and employees. By providing this information, the University of Delaware assumes no financial or other responsibility for any relationship established by and between any company or organization listed on this website and any other individual. Any issues related to transactions that take place as a result of information provided are between the individual and the organization providing the discount.</div>
+Information provided on this website relating to goods and services offered by third parties is provided solely for information purposes and is not intended as an endorsement or expression of support by the University of Delaware or its agents and employees. By providing this information, the University of Delaware assumes no financial or other responsibility for any relationship established by and between any company or organization listed on this website and any other individual. Any issues related to transactions that take place as a result of information provided are between the individual and the organization.</div>
  <div style="clear: both;"></div>
 
 
