@@ -111,7 +111,7 @@
             //echo $sql;
             $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
             echo "<div class=\"rTable\">\n";
-            echo "<div class=\"rTableHeading\"><div class=\"rTableHead\">Dimmer ID</div><div class=\"rTableHead\">Dimmer Name</div><div class=\"rTableHead\">Linearity Score</div><div class=\"rTableHead\">Refire Score</div><div class=\"rTableHead\">Medium dimmer performance scale</div><div class=\"rTableHead\">Low dimmer performance scale</div><div class=\"rTableHead\">Light output efficiency</div><div class=\"rTableHead\">Total Score</div></div>\n";
+            echo "<div class=\"rTableHeading\"><div class=\"rTableHead\">Dimmer ID</div><div class=\"rTableHead\">Dimmer Name</div><div class=\"rTableHead\">Linearity Score</div><div class=\"rTableHead\">Refire Score</div><div class=\"rTableHead\">Medium performance scale</div><div class=\"rTableHead\">Low performance scale</div><div class=\"rTableHead\">Light output efficiency</div><div class=\"rTableHead\">Total Score</div></div>\n";
                 // output data of each row
                 while($row = mysqli_fetch_array($result)) {
                     echo "<div class=\"rTableRow\"><div class=\"rTableCell\">" . $row["dimmer"]. "</div><div class=\"rTableCell\">" . $row["actual"]. "</div><div class=\"rTableCell\">" . $row["r2"]."</div><div class=\"rTableCell\">" . $row["refire_scale"]. "</div><div class=\"rTableCell\">". round($row["calc_50"],2). "</div><div class=\"rTableCell\">" . round($row["calc_20"],2). "</div><div class=\"rTableCell\">". $row["lumen_watt"]. "</div><div class=\"rTableCell\">". round($row["total"],2). "</div></div>\n";
