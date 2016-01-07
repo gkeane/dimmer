@@ -40,14 +40,14 @@
             echo "</select></form>\n";
             $led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
             $leds= htmlspecialchars($led);;
-            $sql = "SELECT dimmer.dimmer,b.actual,r2,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join dimmer_names b on b.dimmer=dimmer.dimmer where lamp='".$leds."'";
+            $sql = "SELECT dimmer.dimmer,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join dimmer_names b on b.dimmer=dimmer.dimmer where lamp='".$leds."'";
             //echo $sql;
             $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
             echo "<div class=\"rTable\">\n";
             echo "<div class=\"rTableHeading\"><div class=\"rTableHead\">Dimmer ID</div><div class=\"rTableHead\">Dimmer Name</div><div class=\"rTableHead\">Linearity Score</div><div class=\"rTableHead\">Refire Score</div><div class=\"rTableHead\">Medium performance scale</div><div class=\"rTableHead\">Low performance scale</div><div class=\"rTableHead\">Light output efficiency</div><div class=\"rTableHead\">Total Score</div></div>\n";
                 // output data of each row
                 while($row = mysqli_fetch_array($result)) {
-                    echo "<div class=\"rTableRow\"><div class=\"rTableCell\">" . $row["dimmer"]. "</div><div class=\"rTableCell\">" . $row["actual"]. "</div><div class=\"rTableCell\">" . $row["r2"]."</div><div class=\"rTableCell\">" . $row["refire_scale"]. "</div><div class=\"rTableCell\">". round($row["calc_50"],2). "</div><div class=\"rTableCell\">" . round($row["calc_20"],2). "</div><div class=\"rTableCell\">". $row["lumen_watt"]. "</div><div class=\"rTableCell\">". round($row["total"],2). "</div></div>\n";
+                    echo "<div class=\"rTableRow\"><div class=\"rTableCell\">" . $row["dimmer"]. "</div><div class=\"rTableCell\">" . $row["actual"]. "</div><div class=\"rTableCell\">" . $row["r2scale"]."</div><div class=\"rTableCell\">" . $row["refire_scale"]. "</div><div class=\"rTableCell\">". round($row["calc_50"],2). "</div><div class=\"rTableCell\">" . round($row["calc_20"],2). "</div><div class=\"rTableCell\">". $row["lumen_watt"]. "</div><div class=\"rTableCell\">". round($row["total"],2). "</div></div>\n";
                 }
             echo "</table>";
             mysqli_close($link);
