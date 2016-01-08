@@ -24,13 +24,13 @@
 
 .dropdown{
 	position: relative;
-	width: 160px;
+	width: 200px;
 	border: 1px solid #ccc;
 	cursor: pointer;
 	background: #fff;
 
 	border-radius: 3px;
-	
+
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
@@ -97,7 +97,7 @@
 	opacity: 0;
 }
 
-/* SELECTED FEEDBACK ITEM */ 
+/* SELECTED FEEDBACK ITEM */
 
 .dropdown .selected,
 .dropdown li{
@@ -121,7 +121,7 @@
 	top: 0;
 	bottom: 0;
 	width: 60px;
-	
+
 	border-radius: 0 2px 2px 0;
 	box-shadow: inset -55px 0 25px -20px #fff;
 }
@@ -159,7 +159,7 @@
 	right: 0;
 	bottom: 0;
 	height: 50px;
-	
+
 	box-shadow: inset 0 -50px 30px -35px #fff;
 }
 

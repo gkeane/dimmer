@@ -1,5 +1,11 @@
 <?php include('header.html');?>
-
+<script>
+$(document).ready(function()
+    {
+        $("#myTable").tablesorter();
+    }
+);
+</script>
 
 <div style="clear: left;"></div>
     <h1>Bulb-Dimmer Interactions</h1>
@@ -43,13 +49,13 @@
             $sql = "SELECT lamp,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer='".$dimmer."'";
             //echo $sql;
             $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
-            echo "<div class=\"rTable\">\n";
-            echo "<div class=\"rTableHeading\"><div class=\"rTableHead\">Lamp ID</div><div class=\"rTableHead\">Lamp Name</div><div class=\"rTableHead\">Linearity Score</div><div class=\"rTableHead\">Refire Score</div><div class=\"rTableHead\">Medium performance scale</div><div class=\"rTableHead\">Low performance scale</div><div class=\"rTableHead\">Light output efficiency</div><div class=\"rTableHead\">Total Score</div></div>\n";
-                // output data of each row
+            echo "<table id=\"myTable\" class=\"tablesorter\"> \n";
+            echo "<thead><tr><th>Lamp ID</th><th>Lamp Name</th><th>Linearity Score</th><th>Refire Score</th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score</th></tr></thead>\n";
+            echo "<tbody>";  // output data of each row
                 while($row = mysqli_fetch_array($result)) {
-                    echo "<div class=\"rTableRow\"><div class=\"rTableCell\">" . $row["lamp"]. "</div><div class=\"rTableCell\">" . $row["actual"]. "</div><div class=\"rTableCell\">" . $row["r2scale"]."</div><div class=\"rTableCell\">" . $row["refire_scale"]. "</div><div class=\"rTableCell\">". round($row["calc_50"],2). "</div><div class=\"rTableCell\">" . round($row["calc_20"],2). "</div><div class=\"rTableCell\">". $row["lumen_watt"]. "</div><div class=\"rTableCell\">". round($row["total"],2). "</div></div>\n";
+                    echo "<tr><td>" . $row["lamp"]. "</td><td>" . $row["actual"]. "</td><td>" . $row["r2scale"]."</td><td>" . $row["refire_scale"]. "</td><td>". round($row["calc_50"],2). "</td><td>" . round($row["calc_20"],2). "</td><td>". $row["lumen_watt"]. "</td><td>". round($row["total"],2). "</td></tr>\n";
                 }
-            echo "</table>";
+            echo "</tbody></table>";
             mysqli_close($link);
             ?>
 
