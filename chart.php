@@ -1,8 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Highcharts Example</title>
+<?php include('header.html');?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -57,7 +53,7 @@ $(function() {
               shared: true
             },
             xAxis: {
-                categories: ['10','20','30','40','50','60','70','80','90','100'],
+                categories: ['100','90','80','70','60','50','40','30','20','10'],
                 crosshair: true
             },
             legend: {
@@ -88,5 +84,4 @@ $(function() {
     </head>
     <body>
     <div id="container" style="height: 500px; min-width: 500px"></div>
-    </body>
-</html>
+<?php include('footer.html');?>

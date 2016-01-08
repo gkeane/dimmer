@@ -32,7 +32,7 @@ $dimmer='A1';
 $led='LED1';
 
 
-$SQL = "SELECT setting, lumen FROM $tablename WHERE dimmer=\"$dimmer\" and led=\"$led\" ORDER BY setting";
+$SQL = "SELECT setting, lumen FROM $tablename WHERE dimmer=\"$dimmer\" and led=\"$led\" ORDER BY setting DESC";
 //echo $SQL;
 $result = mysqli_query($db,$SQL) or die ("Query to get data from dimmer failed: ".mysqli_error($db));
 //$cdresult=mysqli_query($link,$cdquery) or die ("Query to get data from dimmer failed: ".mysqli_error());
@@ -41,7 +41,7 @@ $rows['name'] = 'lumen';
 while($r = mysqli_fetch_array($result)) {
     $rows['data'][] = $r['lumen'];
 }
-$SQL2 = "SELECT setting, lumen_watts as efficiency FROM $tablename WHERE dimmer=\"$dimmer\" and  led=\"$led\" ORDER BY setting";
+$SQL2 = "SELECT setting, lumen_watts as efficiency FROM $tablename WHERE dimmer=\"$dimmer\" and  led=\"$led\" ORDER BY setting DESC";
 $result2 = mysqli_query( $db,$SQL2 ) or die("Couldn?t execute query.".mysqli_error($db));
 $rows2=array();
 $rows2['name'] = 'efficiency';
