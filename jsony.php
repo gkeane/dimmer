@@ -27,9 +27,14 @@ if (is_numeric($_GET["year"])){
  $year = $_GET["year"];
 }
 else
+
 $year = 0; */
-$dimmer='A1';
-$led='LED1';
+$led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
+$led= htmlspecialchars($led);
+$dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
+$dimmer= htmlspecialchars($dim);
+//$dimmer='A1';
+//$led='LED1';
 
 
 $SQL = "SELECT setting, lumen FROM $tablename WHERE dimmer=\"$dimmer\" and led=\"$led\" ORDER BY setting DESC";

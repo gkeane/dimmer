@@ -1,4 +1,26 @@
 <?php include('header.html');?>
+<?php
+
+
+$led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
+$led= htmlspecialchars($led);
+$dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
+$dimmer= htmlspecialchars($dim);
+
+$script = ("<script language=\"JavaScript\">
+<!-- Begin array
+var names= new Array();\n");
+$script .= ("dimmer=\"".$dimmer."\"\n");
+$script .= ("led=\"".$led."\"\n");
+$script .= ('// End -->
+</script>');
+echo $script;
+
+
+
+
+
+?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -6,7 +28,7 @@
 $(function() {
   var chart;
   $(document).ready(function() {
-    $.getJSON('jsony.php', function(data) {
+    $.getJSON('jsony.php?led='+led+'&dimmer='dimmer, function(data) {
         // Create the chart
         chart = new Highcharts.Chart({
                 chart: {
