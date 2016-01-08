@@ -6,7 +6,7 @@
     <p>A total of five different  measurements and calculated values were used to determine a numeric value for  each bulb and dimmer combination (including different dimmer  settings/curves/profiles available on some dimmer models). These bulb-dimmer interactions  included:</p>
     <ul>
       <li><strong>Linearity</strong>&ndash; as measured by correlation  coefficient R2 of the lamp lumen output when dimmed from 100 to 0 in  increments of 10% </li>
-      <li><strong>Re-fire</strong> &ndash; after a lamp is dimmed to 0,  then dimmer setting is ↑ in increments of 1.0 until bulb produces human visible  light</li>
+      <li><strong>Re-fire</strong> &ndash; after a lamp is dimmed to 0,  then dimmer setting is incremented in increments of 1.0 until bulb produces human visible  light</li>
       <li><strong>Projected  vs Actual Lumen Output at 50% dimmer setting
         </strong>
         <ul>
