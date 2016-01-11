@@ -15,6 +15,7 @@ table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 }
 table.tablesorter thead tr .header {
 	background-image: url(bg.gif);
+	padding-right: 10px;
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;

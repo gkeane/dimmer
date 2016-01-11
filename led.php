@@ -2,7 +2,14 @@
 <script>
 $(document).ready(function()
     {
-        $("#myTable").tablesorter();
+        $("#myTable").tablesorter({
+    headers: {
+        // first column
+        8: {
+            sorter: false
+        }
+    }
+})
     }
 );
 </script>
