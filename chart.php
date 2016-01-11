@@ -28,12 +28,12 @@ echo $script;
 $(function() {
   var chart;
   $(document).ready(function() {
-    $.getJSON('jsony.php?led='+led+'&dimmer='dimmer, function(data) {
+    $.getJSON('jsony.php?led='+led+'&dimmer='+dimmer, function(data) {
         // Create the chart
         chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'container',
-                    type: 'line',
+                    type: 'spline',
                     marginRight: 130,
                     marginBottom: 25,
                     zoomType: 'xy'
@@ -47,26 +47,26 @@ $(function() {
               labels: {
                 format: '{value}',
                 style: {
-                    color: Highcharts.getOptions().colors[1]
+                    color: Highcharts.getOptions().colors[0]
                 }
             },
                 title: {
                     text: 'Lumens',
                     style: {
-                        color: Highcharts.getOptions().colors[1]
+                        color: Highcharts.getOptions().colors[0]
                     }
                 }
             }, {
               labels: {
                 format: '{value}',
                 style: {
-                    color: Highcharts.getOptions().colors[0]
+                    color: Highcharts.getOptions().colors[1]
                 }
             },
                 title: {
                     text: 'Efficiency',
                     style: {
-                        color: Highcharts.getOptions().colors[0]
+                        color: Highcharts.getOptions().colors[1]
                     }
                 },
                 opposite: true
@@ -75,28 +75,37 @@ $(function() {
               shared: true
             },
             xAxis: {
+              title: {
+                text: 'Temperature'
+            },
                 categories: ['100','90','80','70','60','50','40','30','20','10'],
                 crosshair: true
             },
             legend: {
                 layout: 'vertical',
                 align: 'left',
-                x: 120,
+                x: 720,
                 verticalAlign: 'top',
-                y: 100,
+                y: 50,
                 floating: true,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
             },
             series: [{
-                type: 'line',
+                type: 'spline',
                 name: 'Lumens',
                 yAxis: 0,
                 data: data[0].data,
+                marker: {
+                   enabled: false
+                }
             }, {
-                type: 'line',
+                type: 'spline',
                 name: 'Efficiency',
                 yAxis: 1,
-                data: data[1].data
+                data: data[1].data,
+                marker: {
+                   enabled: false
+                }
              }]
     });
    });
@@ -105,5 +114,6 @@ $(function() {
         </script>
     </head>
     <body>
-    <div id="container" style="height: 500px; min-width: 500px"></div>
+    <div id="container" style="height: 400px; min-width: 500px"></div>
+  </div><div style="height:200px;"></div>"
 <?php include('footer.html');?>
