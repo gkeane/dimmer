@@ -50,7 +50,7 @@ $(document).ready(function()
             //echo $sql;
             $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
             echo "<table id=\"myTable\" class=\"tablesorter\"> \n";
-            echo "<thead><tr><th>Lamp ID</th><th>Lamp Name</th><th>Linearity Score</th><th>Refire Score</th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score</th><th>Chart</th></tr></thead>\n";
+            echo "<thead><tr><th>Lamp ID  </th><th>Lamp Name</th><th>Linearity Score </th><th>Refire Score  </th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score  </th><th>Chart     </th></tr></thead>\n";
             echo "<tbody>";  // output data of each row
                 while($row = mysqli_fetch_array($result)) {
                     $href="<a href=chart.php?dimmer=".$dimmer."&led=".$row["lamp"].">Chart</a>";
