@@ -6,12 +6,27 @@ $led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
 $led= htmlspecialchars($led);
 $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
 $dimmer= htmlspecialchars($dim);
+$mysqlserver="localhost";
+$mysqlusername="dimmer";
+$mysqlpassword="8Jx43c8JMnvY7e9Z";
+$link=mysqli_connect($localhost, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
+
+$dbname = 'dimmer';
+mysqli_select_db( $link,$dbname) or die ("Error selecting specified database on mysql server: ".mysqli_error());
+
+$get = mysqli_fetch_assoc(mysqli_query($link, "SELECT actual FROM dimmer_names WHERE dimmer = '".$dimmer."'"));
+$dimmer_name=$get['actual'];
+$get = mysqli_fetch_assoc(mysqli_query($link, "SELECT actual FROM led_names WHERE led = '".$led."'"));
+$led_name=$get['actual'];
+//echo $dimmer_name." stuff".$led_name;
 
 $script = ("<script language=\"JavaScript\">
 <!-- Begin array
 var names= new Array();\n");
 $script .= ("dimmer=\"".$dimmer."\"\n");
 $script .= ("led=\"".$led."\"\n");
+$script .= ("dimmer_name=\"".$dimmer_name."\"\n");
+$script .= ("led_name=\"".$led_name."\"\n");
 $script .= ('// End -->
 </script>');
 echo $script;
@@ -40,7 +55,7 @@ $(function() {
                 },
 
             title : {
-                text : 'Dimmer'
+                text : 'Dimmer: '+dimmer_name+' Lamp: '+led_name
             },
 
             yAxis: [{
