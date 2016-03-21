@@ -105,7 +105,23 @@ $(function() {
                 floating: true,
                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
             },
-            series: []
+            series: [{
+                type: 'spline',
+                name: '10per',
+                yAxis: 0,
+                data: data[0].data,
+                marker: {
+                   enabled: false
+                }
+            }, {
+                type: 'spline',
+                name: '20per',
+                yAxis: 1,
+                data: data[1].data,
+                marker: {
+                   enabled: false
+                }
+             }]
     });
    });
  });

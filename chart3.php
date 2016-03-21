@@ -44,7 +44,12 @@ echo $script;
         var options = {
             chart: {
                 renderTo: 'container',
-                type: 'line'
+                type: 'line',
+                events: {
+                load: function() {
+                    this.renderer.image('Capture2.JPG',65,0,770,345).add();  // add image(url, x, y, w, h)
+                }
+            }
             },
             plotOptions: {
                 line: {
@@ -57,10 +62,10 @@ echo $script;
               text: 'Spectral Efficiency'
             },
             xAxis:{
-              title:{text:'X axis title'}
+              title:{text:'Wavelength (nm)'}
             },
             yAxis:{
-              title:{text:'Y axis title'}
+              title:{text:'Luminous power'}
             },
             legend: {
                 layout: 'vertical',
