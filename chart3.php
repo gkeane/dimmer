@@ -47,9 +47,12 @@ echo $script;
                 type: 'line',
                 events: {
                 load: function() {
-                    this.renderer.image('Capture2.JPG',65,0,770,345).add();  // add image(url, x, y, w, h)
+                    this.renderer.image('Capture3.JPG',65,0,770,345).add();  // add image(url, x, y, w, h)
                 }
             }
+            },
+            title : {
+                text : 'Dimmer: '+dimmer_name+' Lamp: '+led_name
             },
             plotOptions: {
                 line: {
@@ -57,9 +60,6 @@ echo $script;
                         enabled: false
                     }
                 }
-            },
-            title: {
-              text: 'Spectral Efficiency'
             },
             xAxis:{
               title:{text:'Wavelength (nm)'}

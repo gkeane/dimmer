@@ -82,7 +82,7 @@ padding:0;
 	background-image: url(images/searchbk.jpg);
 	background-repeat:repeat-x;
 }
-	
+
 .UDStandardHeader_MenuTier {
   width: 100%;
   height: 16px;
@@ -114,7 +114,7 @@ padding:0;
   text-align: right;
   white-space: nowrap;
 }
-  
+
 .UDStandardHeader_MenuList:hover {
   position: relative;
 }
@@ -128,6 +128,10 @@ padding:0;
   border-left: 1px solid #002663;
 }
 .UDStandardHeader_MenuList li.withsep2 {
+  border-left: 1px solid #002663;
+  margin-right:-6px;
+}
+.UDStandardHeader_MenuList li.withsep3 {
   border-left: 1px solid #002663;
   margin-right:-6px;
 }
@@ -320,7 +324,7 @@ padding:0;
     height:0;
     font-size: 1px;
     line-height: 0px;
-	
+
 }.content {
 	display: block;
 	width: 80%;
