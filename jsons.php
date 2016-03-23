@@ -37,16 +37,16 @@ $dimmer= htmlspecialchars($dim);
 //$led='LED1';
 $resultf = array();
 $strings=array(
-array('10per', '10 percent'),
-array('20per', '20 percent'),
-array('30per', '30 percent'),
-array('40per', '40 percent'),
-array('50per', '50 percent'),
-array('60per', '60 percent'),
-array('70per', '70 percent'),
-array('80per', '80 percent'),
-array('90per', '90 percent'),
-array('100per', '100 percent'),
+array('10per', '10 percent','#7cb5ec'),
+array('20per', '20 percent','#91e8e1'),
+array('30per', '30 percent','#90ed7d'),
+array('40per', '40 percent','#f7a35c'),
+array('50per', '50 percent','#8085e9'),
+array('60per', '60 percent','#f15c80'),
+array('70per', '70 percent','#e4d354'),
+array('80per', '80 percent','#8085e8'),
+array('90per', '90 percent','#8d4653'),
+array('100per', '100 percent','#000000')
 );
 //$strings=array('10per','20per','30per','40per','50per','60per','70per','80per','90per','100per');
 
@@ -58,8 +58,10 @@ foreach ($strings as &$string){
   //$cdresult=mysqli_query($link,$cdquery) or die ("Query to get data from dimmer failed: ".mysqli_error());
   $rows=array();
   $rows['name'] = $string[1];
+  $rows['color'] = $string[2];
   while($r = mysqli_fetch_array($result)) {
       //echo $r['nm'];
+
       $rt=array($r['nm'],$r[1]);
       $rows['data'][] = $rt;
   }
