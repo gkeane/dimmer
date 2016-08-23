@@ -5,6 +5,10 @@ $(document).ready(function()
         $("#myTable").tablesorter({
     headers: {
         // first column
+        9: {
+            sorter: false,
+            align: center
+        },
         8: {
             sorter: false
         }
@@ -57,11 +61,12 @@ $(document).ready(function()
             //echo $sql;
             $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
             echo "<table id=\"myTable\" class=\"tablesorter\"> \n";
-            echo "<thead><tr><th>Lamp ID  </th><th>Lamp Name</th><th>Linearity Score </th><th>Refire Score  </th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score  </th><th data-sorder=\"false\">Chart   </th></tr></thead>\n";
+            echo "<thead><tr><th>Lamp ID  </th><th>Lamp Name</th><th>Linearity Score </th><th>Refire Score  </th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score  </th><th data-sorder=\"false\">Chart   </th><th data-sorder=\"false\">Spectral Distribution   </th></tr></thead>\n";
             echo "<tbody>";  // output data of each row
                 while($row = mysqli_fetch_array($result)) {
                     $href="<a href=chart.php?dimmer=".$dimmer."&led=".$row["lamp"].">Chart</a>";
-                    echo "<tr><td>" . $row["lamp"]. "</td><td>" . $row["actual"]. "</td><td>" . $row["r2scale"]."</td><td>" . $row["refire_scale"]. "</td><td>". round($row["calc_50"],2). "</td><td>" . round($row["calc_20"],2). "</td><td>". $row["lumen_watt"]. "</td><td>". round($row["total"],2)."<td>".$href. "</td></tr>\n";
+                    $href2="<a href=chart3.php?dimmer=".$dimmer."&led=".$row["lamp"].">Chart</a>";
+                    echo "<tr><td>" . $row["lamp"]. "</td><td>" . $row["actual"]. "</td><td>" . $row["r2scale"]."</td><td>" . $row["refire_scale"]. "</td><td>". round($row["calc_50"],2). "</td><td>" . round($row["calc_20"],2). "</td><td>". $row["lumen_watt"]. "</td><td>". round($row["total"],2)."<td>".$href. "</td><td align=center>".$href2. "</td></tr>\n";
                 }
             echo "</tbody></table>";
             mysqli_close($link);
