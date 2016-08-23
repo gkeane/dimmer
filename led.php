@@ -9,8 +9,7 @@ $(document).ready(function()
             sorter: false
         },
         9: {
-            sorter: false,
-            align: center
+            sorter: false
         }
     }
 })

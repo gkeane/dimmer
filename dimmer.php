@@ -6,8 +6,7 @@ $(document).ready(function()
     headers: {
         // first column
         9: {
-            sorter: false,
-            align: center
+            sorter: false
         },
         8: {
             sorter: false
