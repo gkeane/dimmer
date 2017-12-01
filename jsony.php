@@ -1,9 +1,7 @@
 <?php
 header("Content-type: text/html");
 // connect to the database
-$mysqlserver="localhost";
-$mysqlusername="dimmer";
-$mysqlpassword="8Jx43c8JMnvY7e9Z";
+include 'db.php';
 $db=mysqli_connect($mysqlserver, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
 
 $dbname = 'dimmer';
@@ -30,16 +28,21 @@ else
 
 $year = 0; */
 $led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
+if (strlen($led)>6){echo "error"; exit();}
 $led= htmlspecialchars($led);
 $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
+if (strlen($dim)>6){echo "error"; exit();}
 $dimmer= htmlspecialchars($dim);
 //$dimmer='A1';
 //$led='LED1';
 
 
-$SQL = "SELECT setting, lumen FROM $tablename WHERE dimmer=\"$dimmer\" and led=\"$led\" ORDER BY setting DESC";
+$sql = "SELECT setting, lumen FROM $tablename WHERE dimmer=\"$dimmer\" and led=\"$led\" ORDER BY setting DESC";
+$stmt=$db->prepare($sql);//ho $sql;
+$stmt->bind_param('ss', $dimmer,$led);
+$stmt->execute();
 //echo $SQL;
-$result = mysqli_query($db,$SQL) or die ("Query to get data from dimmer failed: ".mysqli_error($db));
+$result = $stmt->get_result();
 //$cdresult=mysqli_query($link,$cdquery) or die ("Query to get data from dimmer failed: ".mysqli_error());
 $rows=array();
 $rows['name'] = 'lumen';
