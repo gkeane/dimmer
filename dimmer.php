@@ -59,7 +59,7 @@ $(document).ready(function()
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
             if (strlen($dim)>6){echo "error"; exit();}
             $dimmer= htmlspecialchars($dim);
-            echo $dimmer;
+            //echo $dimmer;
             $sql = "SELECT lamp,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer=?";
             if ($stmt=$link->prepare($sql)){//ho $sql;
             $stmt->bind_param('s', $dimmer);
