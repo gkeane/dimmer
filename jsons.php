@@ -1,9 +1,7 @@
 <?php
 header("Content-type: text/html");
 // connect to the database
-$mysqlserver="localhost";
-$mysqlusername="dimmer";
-$mysqlpassword="8Jx43c8JMnvY7e9Z";
+include 'db.php';
 $db=mysqli_connect($mysqlserver, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
 
 $dbname = 'dimmer';
@@ -29,9 +27,11 @@ if (is_numeric($_GET["year"])){
 else
 
 $year = 0; */
-$led = isset($_GET['led']) ? $_GET['led'] : 'INC';
+$led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
+if (strlen($led)>6){echo "error"; exit();}
 $led= htmlspecialchars($led);
-$dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'B1';
+$dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
+if (strlen($dim)>6){echo "error"; exit();}
 $dimmer= htmlspecialchars($dim);
 //$dimmer='A1';
 //$led='LED1';
@@ -52,9 +52,12 @@ array('100per', '100 percent','#000000')
 
 foreach ($strings as &$string){
   //var_dump($string);
-  $SQL = "SELECT nm, ".$string[0]." FROM $tablename WHERE dimmer=\"$dimmer\" and led=\"$led\" ORDER BY nm";
+  $sql = "SELECT nm, ".$string[0]." FROM $tablename WHERE dimmer=? and led=? ORDER BY nm";
+  $stmt=$db->prepare($sql);//ho $sql;
+  $stmt->bind_param('ss', $dimmer,$led);
+  $stmt->execute();
   //echo $SQL;
-  $result = mysqli_query($db,$SQL) or die ("Query to get data from dimmer failed: ".mysqli_error($db));
+  $result = $stmt->get_result();
   //$cdresult=mysqli_query($link,$cdquery) or die ("Query to get data from dimmer failed: ".mysqli_error());
   $rows=array();
   $rows['name'] = $string[1];

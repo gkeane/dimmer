@@ -3,20 +3,29 @@
 
 
 $led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
+if (strlen($led)>6){echo "error"; exit();}
 $led= htmlspecialchars($led);
 $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
+if (strlen($dim)>6){echo "error"; exit();}
 $dimmer= htmlspecialchars($dim);
-$mysqlserver="localhost";
-$mysqlusername="dimmer";
-$mysqlpassword="8Jx43c8JMnvY7e9Z";
-$link=mysqli_connect($localhost, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
+include 'db.php';
+$link=mysqli_connect($mysqlserver, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
 
 $dbname = 'dimmer';
 mysqli_select_db( $link,$dbname) or die ("Error selecting specified database on mysql server: ".mysqli_error());
-
-$get = mysqli_fetch_assoc(mysqli_query($link, "SELECT actual FROM dimmer_names WHERE dimmer = '".$dimmer."'"));
+$sql="SELECT actual FROM dimmer_names WHERE dimmer = ?";
+$stmt=$link->prepare($sql);//ho $sql;
+$stmt->bind_param('s', $dimmer);
+$stmt->execute();
+$data = $stmt->get_result();
+$get=$data->fetch_assoc();
 $dimmer_name=$get['actual'];
-$get = mysqli_fetch_assoc(mysqli_query($link, "SELECT actual FROM led_names WHERE led = '".$led."'"));
+$sql="SELECT actual FROM led_names WHERE led = ?";
+$stmt=$link->prepare($sql);//ho $sql;
+$stmt->bind_param('s', $dimmer);
+$stmt->execute();
+$data = $stmt->get_result();
+$get=$data->fetch_assoc();
 $led_name=$get['actual'];
 //echo $dimmer_name." stuff".$led_name;
 

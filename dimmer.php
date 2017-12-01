@@ -26,12 +26,14 @@ $(document).ready(function()
         <select class="dropdown" name="dimmer" onchange=this.form.submit()>
 
             <?php
+            include 'db.php';
 
-            $mysqlserver="localhost";
-            $mysqlusername="dimmer";
-            $mysqlpassword="8Jx43c8JMnvY7e9Z";
-            $link=mysqli_connect(localhost, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
-
+            $link=new mysqli($mysqlserver, $mysqlusername, $mysqlpassword);
+            /* check connection */
+            if (mysqli_connect_errno()) {
+                printf("Connect failed: %s\n", mysqli_connect_error());
+                exit();
+            }
             $dbname = 'dimmer';
             mysqli_select_db( $link,$dbname) or die ("Error selecting specified database on mysql server: ".mysqli_error());
 
@@ -55,10 +57,15 @@ $(document).ready(function()
             }
             echo "</select></form>\n";
             $dim = isset($_GET['dimmer']) ? $_GET['dimmer'] : 'A1';
-            $dimmer= htmlspecialchars($dim);;
-            $sql = "SELECT lamp,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer='".$dimmer."'";
-            //echo $sql;
-            $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
+            if (strlen($dim)>6){echo "error"; exit();}
+            $dimmer= htmlspecialchars($dim);
+            echo $dimmer;
+            $sql = "SELECT lamp,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join led_names b on b.led=dimmer.lamp where dimmer=?";
+            if ($stmt=$link->prepare($sql)){//ho $sql;
+            $stmt->bind_param('s', $dimmer);
+            $stmt->execute();
+            $result=$stmt->get_result();
+            //$result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
             echo "<table id=\"myTable\" class=\"tablesorter\"> \n";
             echo "<thead><tr><th>Lamp ID  </th><th>Lamp Name</th><th>Linearity Score </th><th>Refire Score  </th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score  </th><th data-sorder=\"false\">Chart   </th><th data-sorder=\"false\">Spectral Distribution   </th></tr></thead>\n";
             echo "<tbody>";  // output data of each row
@@ -68,7 +75,9 @@ $(document).ready(function()
                     echo "<tr><td>" . $row["lamp"]. "</td><td>" . $row["actual"]. "</td><td>" . $row["r2scale"]."</td><td>" . $row["refire_scale"]. "</td><td>". round($row["calc_50"],2). "</td><td>" . round($row["calc_20"],2). "</td><td>". $row["lumen_watt"]. "</td><td>". round($row["total"],2)."<td>".$href. "</td><td align=center>".$href2. "</td></tr>\n";
                 }
             echo "</tbody></table>";
-            mysqli_close($link);
+            $stmt->close();
+          }
+          $link->close();
             ?>
 
         </select>

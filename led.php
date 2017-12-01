@@ -27,9 +27,7 @@ $(document).ready(function()
 
             <?php
 
-            $mysqlserver="localhost";
-            $mysqlusername="dimmer";
-            $mysqlpassword="8Jx43c8JMnvY7e9Z";
+            include 'db.php';
             $link=mysqli_connect($mysqlserver, $mysqlusername, $mysqlpassword) or die ("Error connecting to mysql server: ".mysqli_error());
 
             $dbname = 'dimmer';
@@ -56,10 +54,13 @@ $(document).ready(function()
             }
             echo "</select></form>\n";
             $led = isset($_GET['led']) ? $_GET['led'] : 'LED1';
+            if (strlen($led)>6){echo "error"; exit();}
             $leds= htmlspecialchars($led);;
-            $sql = "SELECT dimmer.dimmer,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join dimmer_names b on b.dimmer=dimmer.dimmer where lamp='".$leds."'";
-            //echo $sql;
-            $result = mysqli_query($link,$sql) or die ("Query to get data from dimmer failed: ".mysqli_error());
+            $sql = "SELECT dimmer.dimmer,b.actual,r2scale,refire_scale, calc_50, calc_20, lumen_watt, total FROM dimmer inner join dimmer_names b on b.dimmer=dimmer.dimmer where lamp=?";
+            $stmt=$link->prepare($sql);//ho $sql;
+            $stmt->bind_param('s', $leds);
+            $stmt->execute();
+            $result=$stmt->get_result();
             echo "<table id=\"myTable\" class=\"tablesorter\"> \n";
             echo "<thead><tr><th>Dimmer ID</th><th>Dimmer Name</th><th>Linearity Score</th><th>Refire Score</th><th>Medium performance scale</th><th>Low performance scale</th><th>Light output efficiency</th><th>Total Score</th><th>Chart  </th><th>Spectral Distribution</th></tr></thead>\n";
             echo "<tbody>";  // output data of each row
@@ -69,6 +70,7 @@ $(document).ready(function()
                     echo "<tr><td>" . $row["dimmer"]. "</td><td>" . $row["actual"]. "</td><td>" . $row["r2scale"]."</td><td>" . $row["refire_scale"]. "</td><td>". round($row["calc_50"],2). "</td><td>" . round($row["calc_20"],2). "</td><td>". $row["lumen_watt"]. "</td><td>". round($row["total"],2). "</td><td>".$href."</td><td align=center>".$href2."</td></tr>\n";
                 }
             echo "</tbody></table>";
+            $stmt->close();
             mysqli_close($link);
             ?>
 
